@@ -1,27 +1,40 @@
 // App.jsx
 
 import React, { useState } from 'react';
-import { DndContext } from '@dnd-kit/core';
+import { DndContext, closestCenter } from '@dnd-kit/core';
 import { Draggable } from './Draggable';
 import { Droppable } from './Droppable';
 
 function App() {
-  const [parent, setParent] = useState(null);
-  const draggable = (
-    <Draggable id="draggable">
-      Go ahead, drag me.
-    </Draggable>
-  );
+  const users = [
+    { id: 1, first_name: "Jarad", role: "Subcontractor" },
+    { id: 2, first_name: "Eugenie", role: "Subcontractor" },
+    { id: 3, first_name: "Shandra", role: "Construction Expeditor" },
+    { id: 4, first_name: "Patrizius", role: "Surveyor" },
+    { id: 5, first_name: "Angele", role: "Construction Manager" }
+  ];
 
-  const handleDragEnd = ({ over }) => {
-    setParent(over ? over.id : null);
+  const [droppedUser, setDroppedUser] = useState(null);
+
+  const handleDragEnd = ({ over, active }) => {
+    if (over && over.id === "droppable") {
+      const userId = parseInt(active.id.split('-')[1]);
+      const user = users.find(user => user.id === userId);
+      setDroppedUser(user);
+    } else {
+      setDroppedUser(null);
+    }
   };
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
-      {!parent ? draggable : null}
+      {users.map(user => (
+        <Draggable key={user.id} id={`draggable-${user.id}`} aria-label={user.id}>
+          {user.first_name}
+        </Draggable>
+      ))}
       <Droppable id="droppable">
-        {parent === "droppable" ? draggable : 'Drop here'}
+        {droppedUser ? droppedUser.first_name : 'Drop here'}
       </Droppable>
     </DndContext>
   );

@@ -8,9 +8,9 @@ function Droppable(props) {
     id: props.id,
   });
   const style = {
-    width: '200px', // İhtiyaca göre genişliği ayarlayın
-    height: '100px', // İhtiyaca göre yüksekliği ayarlayın
-    border: '2px dashed #000', // Kesikli kenarlık ekleyin
+    width: '200px', 
+    height: '100px', 
+    border: '2px dashed #000',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -25,4 +25,4 @@ function Droppable(props) {
   );
 }
 
-export { Droppable }; // Droppable bileşenini adlandırılmış bir şekilde dışa aktarın
+export  {Droppable}

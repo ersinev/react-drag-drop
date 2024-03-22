@@ -1,3 +1,4 @@
+//Draggable.jsx
 import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
@@ -8,7 +9,6 @@ function Draggable(props) {
   });
   const style = {
     transform: CSS.Translate.toString(transform),
-    backgroundColor:"red"
   };
 
   return (
